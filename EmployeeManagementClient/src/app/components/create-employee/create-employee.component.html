@@ -1,0 +1,73 @@
+
+<div style="width: 80%; margin: 0 auto; padding: 20px; background:white;" >
+  <div *ngIf="id"><h3>{{updateEmployeeTitle}}</h3></div>
+  <div *ngIf="!id"><h3>{{createEmployeeTitle}}</h3></div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" >
+    <div class="row">
+      <div class="form-group col-sm-6">
+        <label for="name">{{firstNameLbl}}</label>
+        <input type="text" class="form-control" id="firstName" [ngClass]="{ 'is-invalid': firstName.touched && firstName.invalid }" [(ngModel)]="employee.firstName" name="firstName" formControlName="firstName">
+        <div class="invalid-feedback" *ngIf="firstName.touched && firstName.errors">
+          <div *ngIf="firstName.errors.required">Specify a First Name.</div>
+          <div *ngIf="firstName.errors.maxlength">The First Name can't exceed 20 characters.</div>
+        </div>
+      </div>
+  
+      <div class="form-group col-sm-6">
+        <label for="name">{{lastNameLbl}}</label>
+        <input type="text" class="form-control" id="lastName" [ngClass]="{ 'is-invalid': lastName.touched && lastName.invalid }" [(ngModel)]="employee.lastName" name="lastName" formControlName="lastName">
+        <div class="invalid-feedback" *ngIf="lastName.touched && lastName.errors">
+          <div *ngIf="lastName.errors.required">Specify a Last Name.</div>
+          <div *ngIf="lastName.errors.maxlength">The Last Name can't exceed 20 characters.</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="form-group col-sm-6">
+        <label for="name">{{emailIDLbl}}</label>
+        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': emailId.touched && emailId.invalid }" id="emailId" [(ngModel)]="employee.emailId" name="emailId" formControlName="emailId">
+        <div class="invalid-feedback" *ngIf="emailId.touched && emailId.errors">
+          <div *ngIf="emailId.errors.required">Specify a emailId.</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h2>{{emplExpLbl}}</h2>
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>{{indexLbl}}</th>
+              <th>{{noOfYearsLbl}}</th>
+              <th>{{descriptionLbl}}</th>
+              <th><button type="button" (click)="addEmployeeExp()" class="btn btn-info">{{addLbl}}</button></th>
+            </tr>
+          </thead>
+          <tbody formArrayName="employeeExpList" >
+              <tr *ngFor="let item of employee.employeeExpList; let pointIndex=index" [formGroupName]="pointIndex">
+                <td>{{pointIndex+1}}</td>
+                <td>
+                  <input class="form-control" [ngClass]="{ 'is-invalid': getYearsValid(pointIndex) }"  [(ngModel)]="employee.employeeExpList[pointIndex].years" formControlName="years"/>
+                  <div class="invalid-feedback" *ngIf="getYearsValid(pointIndex)">
+                    <div *ngIf="getYearsRequied(pointIndex)">Specify a Years.</div>
+                  </div>
+                </td>
+                <td>
+                  <input class="form-control" [ngClass]="{ 'is-invalid': getDescriptionValid(pointIndex) }" [(ngModel)]="employee.employeeExpList[pointIndex].description" formControlName="description"/>
+                  <div class="invalid-feedback" *ngIf="getDescriptionValid(pointIndex)">
+                    <div *ngIf="getDescriptionRequied(pointIndex)">Specify a Description.</div>
+                  </div>
+                </td>
+                <td><button type="button" (click)="deleteEmployeeExp(pointIndex)" class="btn btn-danger">{{deleteLbl}}</button></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="!formGroup.valid">{{submitLbl}}</button>
+  </form>
+</div>

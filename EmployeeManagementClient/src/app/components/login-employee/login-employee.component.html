@@ -1,0 +1,28 @@
+
+<div style="width: 80%; margin: 0 auto; padding: 20px; background:white;" >
+    <div *ngIf="id"><h3>Login Page</h3></div>
+    <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" >
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label for="name">{{emailIDLbl}}</label>
+          <input type="text" class="form-control" id="emailId" [ngClass]="{ 'is-invalid': emailId.touched && emailId.invalid }" [(ngModel)]="employee.emailId" name="emailId" formControlName="emailId">
+          <div class="invalid-feedback" *ngIf="emailId.touched && emailId.errors">
+            <div *ngIf="emailId.errors.required">Specify a emailId.</div>
+          </div>
+        </div>
+    
+        <div class="form-group col-sm-6">
+          <label for="name">{{passwordLbl}}</label>
+          <input type="text" class="form-control" id="password" [ngClass]="{ 'is-invalid': password.touched && password.invalid }" [(ngModel)]="employee.password" name="password" formControlName="password">
+          <div class="invalid-feedback" *ngIf="password.touched && password.errors">
+            <div *ngIf="password.errors.required">Specify a Password.</div>
+          </div>
+        </div>
+      </div>
+      
+      
+  
+      <button type="submit" class="btn btn-success" [disabled]="!formGroup.valid">{{submitLbl}}</button>
+    </form>
+  </div>
+  

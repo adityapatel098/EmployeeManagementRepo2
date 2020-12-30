@@ -1,0 +1,45 @@
+
+
+
+<div *ngIf="employee" style="width: 80%; margin: 0 auto; padding: 20px; background:white;">
+  <h2>Employee Details</h2> 
+  <hr/>
+  <div>
+    <label><b>{{firstNameLbl}}: </b></label> {{employee.firstName}}
+  </div>
+  <div>
+    <label><b>{{lastNameLbl}}: </b></label> {{employee.lastName}}
+  </div>
+  <div>
+    <label><b>{{emailIDLbl}}: </b></label> {{employee.emailId}}
+  </div>
+  <br><br>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4>{{emplExpLbl}}</h4>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>{{indexLbl}}</th>
+            <th>{{noOfYearsLbl}}</th>
+            <th>{{descriptionLbl}}</th>
+           </tr>
+        </thead>
+        <tbody  >
+            <tr *ngFor="let item of employee.employeeExpList; let pointIndex=index" >
+              <td>{{pointIndex+1}}</td>
+              <td>{{item.years}}</td>
+              <td>{{item.description}}</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>  
+</div>
+
+<br>
+<br>
+<button (click)="list()" class="btn btn-primary">Back to Employee List</button><br>
+
+

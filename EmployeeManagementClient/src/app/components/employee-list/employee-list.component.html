@@ -1,0 +1,29 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Employee List</h2>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{firstNameLbl}}</th>
+          <th>{{lastNameLbl}}</th>
+          <th>{{emailIDLbl}}</th>
+          <th>{{actionsLbl}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees | async">
+          <td>{{employee.firstName}}</td>
+          <td>{{employee.lastName}}</td>
+          <td>{{employee.emailId}}</td>
+          <td><button (click)="deleteEmployee(employee.id)" class="btn btn-danger">{{deleteLbl}}</button>
+              <button (click)="updateEmployee(employee.id)" class="btn btn-info" style="margin-left: 10px">{{updateLbl}}</button>
+              <button (click)="employeeDetails(employee.id)" class="btn btn-secondary" style="margin-left: 10px">{{detailsLbl}}</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
